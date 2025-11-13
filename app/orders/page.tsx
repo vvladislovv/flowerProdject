@@ -7,6 +7,18 @@ import BottomNav from '@/components/BottomNav'
 import { storage } from '@/lib/storage'
 import { Order } from '@/lib/types'
 
+const getStatusLabel = (status: string): string => {
+  const statusMap: Record<string, string> = {
+    'pending': 'Ожидает',
+    'confirmed': 'Подтверждён',
+    'preparing': 'Готовится',
+    'delivering': 'В пути',
+    'delivered': 'Доставлен',
+    'cancelled': 'Отменён',
+  }
+  return statusMap[status] || status
+}
+
 export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>([])
 
@@ -52,10 +64,14 @@ export default function OrdersPage() {
                         ? 'bg-green-100/50 text-green-700'
                         : order.status === 'delivering'
                         ? 'bg-blue-100/50 text-blue-700'
-                        : 'bg-yellow-100/50 text-yellow-700'
+                        : order.status === 'confirmed'
+                        ? 'bg-yellow-100/50 text-yellow-700'
+                        : order.status === 'preparing'
+                        ? 'bg-blue-100/50 text-blue-700'
+                        : 'bg-gray-100/50 text-gray-700'
                     }`}
                   >
-                    {order.status}
+                    {getStatusLabel(order.status)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between mt-3 pt-3 border-t">

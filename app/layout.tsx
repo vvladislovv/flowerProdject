@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import HydrationFix from '@/components/HydrationFix'
 
 export const metadata: Metadata = {
   title: 'Flower Delivery - Цветочный магазин',
@@ -19,7 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className="overflow-x-hidden" suppressHydrationWarning>
-      <body className="overflow-x-hidden w-full max-w-full" suppressHydrationWarning>{children}</body>
+      <body className="overflow-x-hidden w-full max-w-full" suppressHydrationWarning>
+        <HydrationFix />
+        {children}
+      </body>
     </html>
   )
 }

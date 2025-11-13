@@ -30,14 +30,14 @@ export default function WelcomePage() {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1)
     } else {
-      router.push('/signin')
+      router.push('/home')
     }
   }
 
   return (
-    <div className="min-h-screen flex flex-col w-full overflow-x-hidden">
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 max-w-md mx-auto w-full overflow-x-hidden">
-        <div className="text-center mb-8 glass-card p-6 animate-scale-in">
+    <div className="min-h-screen flex flex-col w-full overflow-x-hidden" suppressHydrationWarning>
+      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 max-w-md mx-auto w-full overflow-x-hidden" suppressHydrationWarning>
+        <div className="text-center mb-8 glass-card p-6 animate-scale-in" suppressHydrationWarning>
           <h1 className="text-3xl font-bold text-gray-900 mb-4">
             {steps[currentStep].title}
           </h1>
@@ -46,11 +46,11 @@ export default function WelcomePage() {
           </p>
         </div>
 
-        <div className="w-full h-64 mb-8 flex items-center justify-center glass-card border border-white/30 animate-fade-in">
-          <span className="text-9xl animate-scale-in" style={{ animationDelay: '0.2s' }}>{steps[currentStep].emoji}</span>
+        <div className="w-full h-64 mb-8 flex items-center justify-center glass-card border border-white/30 animate-fade-in" suppressHydrationWarning>
+          <span className="text-9xl animate-scale-in" style={{ animationDelay: '0.2s' }} suppressHydrationWarning>{steps[currentStep].emoji}</span>
         </div>
 
-        <div className="flex gap-2 mb-8">
+        <div className="flex gap-2 mb-8" suppressHydrationWarning>
           {steps.map((_, index) => (
             <div
               key={index}
@@ -59,6 +59,7 @@ export default function WelcomePage() {
                   ? 'bg-primary-green w-8'
                   : 'bg-gray-300 w-2'
               }`}
+              suppressHydrationWarning
             />
           ))}
         </div>
@@ -74,7 +75,7 @@ export default function WelcomePage() {
 
         {currentStep < steps.length - 1 && (
           <button
-            onClick={() => router.push('/signin')}
+            onClick={() => router.push('/home')}
             className="text-gray-500 text-sm animate-fade-in"
             style={{ animationDelay: '0.4s' }}
           >

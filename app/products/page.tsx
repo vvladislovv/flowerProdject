@@ -20,9 +20,23 @@ export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
+    // Загрузить продукты (storage.getProducts() автоматически инициализирует новые товары если их нет)
     const allProducts = storage.getProducts()
     setProducts(allProducts)
     setFilteredProducts(allProducts)
+    
+    // Загрузить сохраненные фильтры из localStorage
+    if (typeof window !== 'undefined') {
+      const savedFilters = localStorage.getItem('flowers_filters')
+      if (savedFilters) {
+        try {
+          const parsed = JSON.parse(savedFilters)
+          setFilters(parsed)
+        } catch (e) {
+          console.error('Error loading filters:', e)
+        }
+      }
+    }
   }, [])
 
   useEffect(() => {
@@ -62,6 +76,10 @@ export default function ProductsPage() {
   const handleApplyFilters = (newFilters: FilterOptions) => {
     setFilters(newFilters)
     setShowFilters(false)
+    // Сохранить фильтры в localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('flowers_filters', JSON.stringify(newFilters))
+    }
   }
 
   return (
@@ -87,7 +105,7 @@ export default function ProductsPage() {
               <button
                 onClick={() => setViewMode('grid')}
                 className={`p-2 transition-all duration-200 ${
-                  viewMode === 'grid' ? 'glass bg-primary-green/80 text-white border border-primary-green/50 shadow-lg' : 'text-gray-600 hover:bg-white/50'
+                  viewMode === 'grid' ? 'glass bg-white/90 text-gray-900 border border-gray-300 shadow-lg' : 'text-gray-600 hover:bg-white/50'
                 }`}
               >
                 <FiGrid className="w-4 h-4" />
@@ -95,7 +113,7 @@ export default function ProductsPage() {
               <button
                 onClick={() => setViewMode('list')}
                 className={`p-2 transition-all duration-200 ${
-                  viewMode === 'list' ? 'glass bg-primary-green/80 text-white border border-primary-green/50 shadow-lg' : 'text-gray-600 hover:bg-white/50'
+                  viewMode === 'list' ? 'glass bg-white/90 text-gray-900 border border-gray-300 shadow-lg' : 'text-gray-600 hover:bg-white/50'
                 }`}
               >
                 <FiList className="w-4 h-4" />
@@ -193,14 +211,20 @@ function FilterModal({
   onClose: () => void
 }) {
   const [localFilters, setLocalFilters] = useState<FilterOptions>(filters)
+  
+  useEffect(() => {
+    setLocalFilters(filters)
+  }, [filters])
 
-  const categories = ['All', 'Bouquets', 'Indoor', 'Accessories', 'Gifts']
+  const categories = ['All', 'Bouquets', 'Indoor', 'Accessories', 'Gifts', 'Seeds', 'Care']
   const categoryLabels: Record<string, string> = {
     'All': 'Все',
     'Bouquets': 'Букеты',
     'Indoor': 'Комнатные',
     'Accessories': 'Аксессуары',
-    'Gifts': 'Подарки'
+    'Gifts': 'Подарки',
+    'Seeds': 'Семена',
+    'Care': 'Уход'
   }
   const occasions = ['Birthday', 'Anniversary', 'Wedding', 'Valentine', 'Housewarming']
   const flowers = ['Roses', 'Lilies', 'Tulips', 'Peonies', 'Hyacinths', 'Marigolds', 'Daffodils']

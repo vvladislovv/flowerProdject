@@ -6,6 +6,7 @@ import Header from '@/components/Header'
 import BottomNav from '@/components/BottomNav'
 import { storage } from '@/lib/storage'
 import { Order } from '@/lib/types'
+import { ORDER_STATUS_BADGES, ORDER_STATUS_LABELS } from '@/lib/status'
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>([])
@@ -47,15 +48,9 @@ export default function OrdersPage() {
                     </p>
                   </div>
                   <span
-                    className={`px-3 py-1 text-xs font-medium glass-button border border-white/30 ${
-                      order.status === 'delivered'
-                        ? 'bg-green-100/50 text-green-700'
-                        : order.status === 'delivering'
-                        ? 'bg-blue-100/50 text-blue-700'
-                        : 'bg-yellow-100/50 text-yellow-700'
-                    }`}
+                    className={`px-3 py-1 text-xs font-medium glass-button border border-white/30 ${ORDER_STATUS_BADGES[order.status] || 'bg-gray-100 text-gray-700'}`}
                   >
-                    {order.status}
+                    {ORDER_STATUS_LABELS[order.status] || ORDER_STATUS_LABELS.pending}
                   </span>
                 </div>
                 <div className="flex items-center justify-between mt-3 pt-3 border-t">

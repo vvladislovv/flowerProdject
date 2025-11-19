@@ -130,10 +130,10 @@ export default function PaymentPage() {
                   required
                 />
                 <Input
-                  label="CVV"
+                  label="Код CVV"
                   value={payment.securityCode}
                   onChange={(e) => setPayment({ ...payment, securityCode: e.target.value })}
-                  placeholder="CVV"
+                  placeholder="***"
                   maxLength={4}
                   required
                 />

@@ -7,12 +7,14 @@ import Button from '@/components/Button'
 import { storage } from '@/lib/storage'
 import { Order } from '@/lib/types'
 import EmojiImage from '@/components/EmojiImage'
+import { ORDER_STATUS_DESCRIPTIONS, ORDER_STATUS_LABELS } from '@/lib/status'
 
-const statusSteps = [
-  { key: 'confirmed', label: 'Подтверждён', icon: '✓' },
-  { key: 'preparing', label: 'Готовится', icon: '🌺' },
-  { key: 'delivering', label: 'В пути', icon: '🚗' },
-  { key: 'delivered', label: 'Доставлен', icon: '🎉' },
+const statusSteps: Array<{ key: Order['status']; label: string; icon: string }> = [
+  { key: 'pending', label: ORDER_STATUS_LABELS.pending, icon: '⏳' },
+  { key: 'confirmed', label: ORDER_STATUS_LABELS.confirmed, icon: '✓' },
+  { key: 'preparing', label: ORDER_STATUS_LABELS.preparing, icon: '🌺' },
+  { key: 'delivering', label: ORDER_STATUS_LABELS.delivering, icon: '🚗' },
+  { key: 'delivered', label: ORDER_STATUS_LABELS.delivered, icon: '🎉' },
 ]
 
 export default function OrderTrackingPage() {
@@ -39,7 +41,7 @@ export default function OrderTrackingPage() {
   }
 
   const currentStatusIndex = statusSteps.findIndex((s) => s.key === order.status)
-  const statusProgress = ((currentStatusIndex + 1) / statusSteps.length) * 100
+  const normalizedStatusIndex = currentStatusIndex >= 0 ? currentStatusIndex : 0
 
   return (
     <div className="min-h-screen pb-20 w-full overflow-x-hidden">
@@ -49,11 +51,15 @@ export default function OrderTrackingPage() {
         {/* Order Status */}
         <div className="glass-card p-6 animate-scale-in">
           <h2 className="text-xl font-bold mb-4 text-gray-900">Заказ #{order.id.slice(-8)}</h2>
-          
+          {order.status === 'cancelled' && (
+            <div className="glass-button border border-red-200/60 text-red-600 p-3 rounded-xl mb-4 text-sm">
+              {ORDER_STATUS_DESCRIPTIONS.cancelled}
+            </div>
+          )}
           <div className="space-y-4">
             {statusSteps.map((step, index) => {
-              const isActive = index <= currentStatusIndex
-              const isCurrent = index === currentStatusIndex
+              const isActive = index <= normalizedStatusIndex && order.status !== 'cancelled'
+              const isCurrent = index === normalizedStatusIndex
 
               return (
                 <div key={step.key} className="flex items-start gap-4 animate-slide-in-right" style={{ animationDelay: `${index * 0.1}s` }}>
@@ -76,7 +82,7 @@ export default function OrderTrackingPage() {
                     </p>
                     {isCurrent && (
                       <p className="text-sm text-gray-900 mt-1">
-                        {step.key === 'confirmed' ? 'Ваш заказ подтверждён' : step.key === 'preparing' ? 'Ваш заказ готовится' : step.key === 'delivering' ? 'Ваш заказ в пути' : 'Ваш заказ доставлен'}
+                        {ORDER_STATUS_DESCRIPTIONS[step.key]}
                       </p>
                     )}
                   </div>

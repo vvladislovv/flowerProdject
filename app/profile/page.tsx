@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import BottomNav from '@/components/BottomNav'
 import { storage } from '@/lib/storage'
+import { ORDER_STATUS_LABELS } from '@/lib/status'
 
 export default function ProfilePage() {
   const [mounted, setMounted] = useState(false)
@@ -105,8 +106,8 @@ export default function ProfilePage() {
                     <p className="font-bold text-primary-green">
                       {order.total.toFixed(2)} ₽
                     </p>
-                    <p className="text-xs text-gray-900 capitalize">
-                      {order.status}
+                    <p className="text-xs text-gray-900">
+                      {ORDER_STATUS_LABELS[order.status] || ORDER_STATUS_LABELS.pending}
                     </p>
                   </div>
                 </Link>

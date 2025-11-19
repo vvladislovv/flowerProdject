@@ -115,7 +115,7 @@ function ChatContent() {
             type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Type a message..."
+            placeholder="Введите сообщение..."
             className="flex-1 px-4 py-2 glass-button border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary-green"
           />
           <button
@@ -133,9 +133,9 @@ function ChatContent() {
 function ChatLoading() {
   return (
     <div className="min-h-screen flex flex-col w-full overflow-x-hidden">
-      <Header title="Chat with Florist" showBack showCart={false} />
+      <Header title="Чат с флористом" showBack showCart={false} />
       <div className="flex-1 flex items-center justify-center text-gray-500">
-        Loading chat...
+        Загружаем чат...
       </div>
     </div>
   )

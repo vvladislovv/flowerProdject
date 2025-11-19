@@ -7,19 +7,6 @@ import Header from '@/components/Header'
 import BottomNav from '@/components/BottomNav'
 import Button from '@/components/Button'
 import { storage } from '@/lib/storage'
-import { Order } from '@/lib/types'
-
-const getStatusLabel = (status: string): string => {
-  const statusMap: Record<string, string> = {
-    'pending': 'Ожидает',
-    'confirmed': 'Подтверждён',
-    'preparing': 'Готовится',
-    'delivering': 'В пути',
-    'delivered': 'Доставлен',
-    'cancelled': 'Отменён',
-  }
-  return statusMap[status] || status
-}
 
 export default function ProfilePage() {
   const router = useRouter()
@@ -113,8 +100,8 @@ export default function ProfilePage() {
                     <p className="font-bold text-primary-green">
                       {order.total.toFixed(2)} ₽
                     </p>
-                    <p className="text-xs text-gray-900">
-                      {getStatusLabel(order.status)}
+                    <p className="text-xs text-gray-900 capitalize">
+                      {order.status}
                     </p>
                   </div>
                 </Link>

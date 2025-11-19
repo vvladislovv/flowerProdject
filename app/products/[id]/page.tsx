@@ -119,14 +119,9 @@ export default function ProductDetailPage() {
                 {product.reviewsCount} отзывов
               </span>
             </div>
-            <div className="mb-4">
-              <p className="text-lg text-gray-600 mb-1">
-                Цена за единицу: <span className="text-primary-green font-semibold">{product.price} ₽</span>
-              </p>
-              <p className="text-2xl font-bold text-primary-green">
-                Итого: {product.price * quantity} ₽
-              </p>
-            </div>
+            <p className="text-2xl font-bold text-primary-green mb-4">
+              {product.price} ₽
+            </p>
           </div>
 
           {/* Seller Info */}
@@ -149,17 +144,17 @@ export default function ProductDetailPage() {
           {product.size && (
             <div>
               <h3 className="font-semibold mb-2 text-gray-900">Размер</h3>
-              <p className="text-gray-900">
-                {product.size === 'Small' ? 'Маленький' :
-                 product.size === 'Medium' ? 'Средний' :
-                 product.size === 'Large' ? 'Большой' :
-                 product.size === 'Boutique' ? 'Бутик' :
-                 product.size === 'Set' ? 'Набор' :
-                 product.size === 'Standard' ? 'Стандартный' :
-                 product.size}
-              </p>
+              <p className="text-gray-900">{product.size}</p>
             </div>
           )}
+
+          {/* Reviews Link */}
+          <Link
+            href={`/products/${product.id}/reviews`}
+            className="block py-3 text-center text-primary-green hover:underline"
+          >
+            Посмотреть все отзывы ({product.reviewsCount})
+          </Link>
 
           {/* Action Buttons */}
           <div className="fixed bottom-0 left-0 right-0 glass-dark border-t border-white/30 p-4 max-w-md mx-auto">

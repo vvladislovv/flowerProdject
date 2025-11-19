@@ -87,7 +87,9 @@ export default function ProductsPage() {
               <button
                 onClick={() => setViewMode('grid')}
                 className={`p-2 transition-all duration-200 ${
-                  viewMode === 'grid' ? 'glass bg-primary-green/80 text-white border border-primary-green/50 shadow-lg' : 'text-gray-600 hover:bg-white/50'
+                  viewMode === 'grid'
+                    ? 'glass bg-white text-gray-900 border border-primary-green/60 shadow-lg'
+                    : 'text-gray-600 hover:bg-white/50'
                 }`}
               >
                 <FiGrid className="w-4 h-4" />
@@ -95,7 +97,9 @@ export default function ProductsPage() {
               <button
                 onClick={() => setViewMode('list')}
                 className={`p-2 transition-all duration-200 ${
-                  viewMode === 'list' ? 'glass bg-primary-green/80 text-white border border-primary-green/50 shadow-lg' : 'text-gray-600 hover:bg-white/50'
+                  viewMode === 'list'
+                    ? 'glass bg-white text-gray-900 border border-primary-green/60 shadow-lg'
+                    : 'text-gray-600 hover:bg-white/50'
                 }`}
               >
                 <FiList className="w-4 h-4" />

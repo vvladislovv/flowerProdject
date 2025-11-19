@@ -42,7 +42,7 @@ export default function WishlistPage() {
             onClick={() => setActiveTab('products')}
             className={`flex-1 py-2 font-medium transition-all duration-200 ${
               activeTab === 'products'
-                ? 'glass bg-primary-green/80 text-white border border-primary-green/50 shadow-lg'
+                ? 'glass bg-white text-gray-900 border border-primary-green/60 shadow-lg'
                 : 'glass-button text-gray-900 border border-white/30 hover:bg-white/70'
             }`}
           >
@@ -52,7 +52,7 @@ export default function WishlistPage() {
             onClick={() => setActiveTab('florists')}
             className={`flex-1 py-2 font-medium transition-all duration-200 ${
               activeTab === 'florists'
-                ? 'glass bg-primary-green/80 text-white border border-primary-green/50 shadow-lg'
+                ? 'glass bg-white text-gray-900 border border-primary-green/60 shadow-lg'
                 : 'glass-button text-gray-900 border border-white/30 hover:bg-white/70'
             }`}
           >

@@ -122,7 +122,7 @@ export default function HomePage() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-2 text-sm font-medium whitespace-nowrap transition-all duration-300 rounded-full animate-slide-in-right flex-shrink-0 ${
                   selectedCategory === cat
-                    ? 'glass bg-primary-green/80 text-white border border-primary-green/50 shadow-lg'
+                    ? 'glass bg-white text-gray-900 border border-primary-green/60 shadow-lg'
                     : 'glass-button text-gray-900 border border-white/30 hover:bg-white/70'
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}

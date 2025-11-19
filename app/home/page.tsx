@@ -18,13 +18,21 @@ export default function HomePage() {
 
   useEffect(() => {
     setMounted(true)
-    const currentUser = storage.getUser()
-    setUser(currentUser)
-    
+    let currentUser = storage.getUser()
+
     if (!currentUser) {
-      router.push('/welcome')
+      currentUser = {
+        id: 'guest',
+        name: 'Гость',
+        email: 'guest@example.com',
+        phone: '+7 (000) 000-00-00',
+        location: 'Москва, Россия',
+      }
+      storage.setUser(currentUser)
     }
-  }, [router])
+
+    setUser(currentUser)
+  }, [])
 
   if (!mounted || !user) {
     return (

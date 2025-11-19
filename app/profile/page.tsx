@@ -1,27 +1,32 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Header from '@/components/Header'
 import BottomNav from '@/components/BottomNav'
-import Button from '@/components/Button'
 import { storage } from '@/lib/storage'
 
 export default function ProfilePage() {
-  const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [user, setUser] = useState<any>(null)
 
   useEffect(() => {
     setMounted(true)
-    const currentUser = storage.getUser()
-    setUser(currentUser)
-    
+    let currentUser = storage.getUser()
+
     if (!currentUser) {
-      router.push('/welcome')
+      currentUser = {
+        id: 'guest',
+        name: 'Гость',
+        email: 'guest@example.com',
+        phone: '+7 (000) 000-00-00',
+        location: 'Москва, Россия',
+      }
+      storage.setUser(currentUser)
     }
-  }, [router])
+
+    setUser(currentUser)
+  }, [])
 
   if (!mounted || !user) {
     return (

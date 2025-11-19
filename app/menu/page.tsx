@@ -12,7 +12,7 @@ export default function MenuPage() {
 
   const handleLogout = () => {
     storage.setUser(null)
-    router.push('/welcome')
+    router.push('/home')
   }
 
   const menuItems = [

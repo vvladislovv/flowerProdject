@@ -43,6 +43,8 @@ export default function ProductDetailPage() {
     )
   }
 
+  const totalPrice = product.price * quantity
+
   const handleAddToCart = () => {
     storage.addToCart({
       product,
@@ -119,9 +121,24 @@ export default function ProductDetailPage() {
                 {product.reviewsCount} отзывов
               </span>
             </div>
-            <p className="text-2xl font-bold text-primary-green mb-4">
-              {product.price} ₽
-            </p>
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <p className="text-xs uppercase tracking-wide text-gray-500">
+                  Цена за штуку
+                </p>
+                <p className="text-xl font-semibold text-gray-900">
+                  {product.price} ₽
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="text-xs uppercase tracking-wide text-gray-500">
+                  Итого ({quantity} шт.)
+                </p>
+                <p className="text-2xl font-bold text-primary-green">
+                  {totalPrice} ₽
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Seller Info */}
